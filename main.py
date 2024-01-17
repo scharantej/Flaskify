@@ -1,39 +1,63 @@
  
 # Import necessary libraries
 from flask import Flask, render_template, request
-import sqlite3
 
 # Create a Flask app
 app = Flask(__name__)
 
-# Define the route for the index page
+# Define the main route
 @app.route('/')
 def index():
+    """
+    Renders the main page of the application.
+    """
     return render_template('index.html')
 
-# Define the route for the results page
-@app.route('/results', methods=['POST'])
-def results():
-    # Get the user's input from the form
-    app_name = request.form['app_name']
-    app_description = request.form['app_description']
-    app_features = request.form['app_features']
-    app_target_audience = request.form['app_target_audience']
+# Define the route to handle the user's input
+@app.route('/result', methods=['POST'])
+def result():
+    """
+    Processes the user's input and generates the results.
+    """
+    # Get the user's input
+    input_text = request.form.get('input_text')
 
-    # Calculate the estimated cost of building the iOS app
-    estimated_cost = 0  # Placeholder for the actual calculation
+    # Process the user's input and generate the results
+    results = process_input(input_text)
 
-    # Query the database of potential iOS developers
-    connection = sqlite3.connect('developers.db')
-    cursor = connection.cursor()
-    query = "SELECT * FROM developers WHERE skills LIKE ?"
-    cursor.execute(query, ('%' + app_features + '%',))
-    developers = cursor.fetchall()
-    connection.close()
+    # Render the result page, passing the results as a parameter
+    return render_template('result.html', results=results)
 
-    # Render the results page with the estimated cost and list of developers
-    return render_template('results.html', estimated_cost=estimated_cost, developers=developers)
+# Define the function to process the user's input
+def process_input(input_text):
+    """
+    Processes the user's input and generates the results.
 
-# Run the Flask app
+    Args:
+        input_text (str): The user's input text.
+
+    Returns:
+        results (list): A list of results generated from the user's input.
+    """
+
+    # Split the user's input into words
+    words = input_text.split()
+
+    # Count the number of words in the user's input
+    word_count = len(words)
+
+    # Count the number of unique words in the user's input
+    unique_words = set(words)
+    unique_word_count = len(unique_words)
+
+    # Generate the results
+    results = [
+        {'label': 'Word Count', 'value': word_count},
+        {'label': 'Unique Word Count', 'value': unique_word_count},
+    ]
+
+    return results
+
+# Run the app
 if __name__ == '__main__':
     app.run()
