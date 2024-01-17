@@ -4,25 +4,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>iOS App Development Cost Estimator</title>
+<title>Flask Application</title>
 </head>
 <body>
-<h1>iOS App Development Cost Estimator</h1>
-<p>This tool will help you estimate the cost of building your iOS app.</p>
-<form action="/results" method="POST">
-<label for="app_name">App Name:</label>
-<input type="text" name="app_name" id="app_name">
+<h1>Word Counter</h1>
+<form action="/result" method="POST">
+<label for="input_text">Enter your text:</label>
+<textarea id="input_text" name="input_text" rows="4" cols="50"></textarea>
 <br>
-<label for="app_description">App Description:</label>
-<textarea name="app_description" id="app_description"></textarea>
-<br>
-<label for="app_features">App Features:</label>
-<input type="text" name="app_features" id="app_features">
-<br>
-<label for="app_target_audience">App Target Audience:</label>
-<input type="text" name="app_target_audience" id="app_target_audience">
-<br>
-<input type="submit" value="Estimate Cost">
+<input type="submit" value="Count Words">
 </form>
 </body>
 </html>
