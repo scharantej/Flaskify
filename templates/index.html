@@ -1,20 +1,17 @@
 
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flask Application</title>
+<title>Single Web Page Application</title>
 </head>
 <body>
-<h1>Word Counter</h1>
-<form action="/result" method="POST">
-<label for="input_text">Enter your text:</label>
-<textarea id="input_text" name="input_text" rows="4" cols="50"></textarea>
-<br>
-<input type="submit" value="Count Words">
+<h1>Single Web Page Application</h1>
+<form action="/submit" method="POST">
+<input type="text" name="data">
+<input type="submit" value="Submit">
 </form>
+<div id="result"></div>
 </body>
 </html>
-
 
